@@ -1,0 +1,49 @@
+#spring:
+#  profiles:
+#    active:
+
+########################## 公共配置 ###########################
+spring:
+  jackson:
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+    converters:
+      preferred-json-mapper: jackson
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      file-size-threshold: 0
+      max-request-size: 10MB
+  mvc:
+    static-path-pattern: /static/static/**
+    view:
+      suffix: .html
+      prefix: /static/view
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  type-aliases-package: top.fkxuexi.smk.entity
+  mapper-locations: classpth:mapper/*.xml
+
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1/smk?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: 123456
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    filters: stat,wall,log4j
+    poolPreparedStatements: true
+    connectionProperties: druid.stat.mergeSql=true
+
