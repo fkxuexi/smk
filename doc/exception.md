@@ -1,0 +1,1 @@
+- spring-boot 打 war包的时候要使用tomcat8 否则将报错 找不到elManager

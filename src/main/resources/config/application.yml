@@ -1,9 +1,6 @@
-#spring:
-#  profiles:
-#    active:
-
-########################## 公共配置 ###########################
 spring:
+  profiles:
+    active: dev
   jackson:
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
   http:
@@ -19,26 +16,14 @@ spring:
       file-size-threshold: 0
       max-request-size: 10MB
   mvc:
-    static-path-pattern: /static/static/**
+    static-path-pattern: /static/**
     view:
-      suffix: .html
-      prefix: /static/view
+      prefix: /templates/
+#  resources:
+#    static-locations: classpath:/webapp/
   datasource:
+    driverClassName: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-
-mybatis:
-  type-aliases-package: top.fkxuexi.smk.entity
-  mapper-locations: classpth:mapper/*.xml
-
-
----
-
-spring:
-  profiles: dev
-  datasource:
-    url: jdbc:mysql://127.0.0.1/smk?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-    username: root
-    password: 123456
     initialSize: 5
     minIdle: 5
     maxActive: 20
@@ -46,4 +31,30 @@ spring:
     filters: stat,wall,log4j
     poolPreparedStatements: true
     connectionProperties: druid.stat.mergeSql=true
+    testOnBorrow: true
+    loginUsername: fkxuexi
+    loginPassword: fkxuexi
+    filters: stat,wall,slf4j
+
+mybatis:
+  type-aliases-package: top.fkxuexi.smk.entity
+  mapper-locations: classpth:mapper/*.xml
+
+beetlsql:
+  enabled: false
+beetl:
+  delimiter-statement-start: \(
+  delimiter-statement-end: \)
+
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1/smk?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: 123456
+
+
+
+
 
